@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    #div1 {
+      width: 380px;
+      height: 300px;
+      padding: 10px;
+      border: 1px solid #aaa;
+      background: lightyellow;
+    }
+
+    #div2 {
+      width: 380px;
+      height: 300px;
+      padding: 10px;
+      border: 1px solid #aaa;
+      background: crimson;
+    }
+
+    body {
+      background: lightgray;
+      margin: 50px;
+    }
+
+    h2 {
+      font-size: 60px;
+      color: red;
+    }
+
+  </style>
+  <head>
+    <script>
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+      function dragStart(ev) {
+        ev.dataTransfer.setData("text", ev.target.id)
+      }
+      function dropIt(ev) {
+        ev.preventDefault();
+        let dataId = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(dataId));
+        let dog = document.getElementById('dogs');
+        dog.value=dog.value + ' ' + dataId;
+      }
+      function dropIt2(ev) {
+        ev.preventDefault();
+        let dataId = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(dataId));
+        let dog = document.getElementById('dogs');
+        dog.value=dog.value.replace(dataId, '')
+      }
+
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p><h1>My favorite Dogs</h1></p>
+    <br>
+    <p><h1>Choose your favorite dogs in order of preference:</h1></p>
+
+    <div id="div1" ondrop="dropIt2(event)" ondragover="allowDrop(event)">
+
+    <img
+      src="nosy.jpeg"
+      id="Nosy"
+      style="width: 120px; height: 100px"
+      draggable="true"
+      ondragstart="dragStart(event)"
+    />
+    <img
+      src="oreo.jpeg"
+      id="Oreo"
+      style="width: 120px; height: 100px"
+      draggable="true"
+      ondragstart="dragStart(event)"
+    />
+    <img
+      src="sadeyes.jpeg"
+      id="Sadeyes"
+      style="width: 200px"
+      draggable="true"
+      ondragstart="dragStart(event)"
+    />
+  </div>
+  <br>
+  Drag up or down
+  <br>
+
+  <div id="div2" ondrop="dropIt(event)" ondragover="allowDrop(event)"></div>
+
+  My choices:
+  <input type="text" id='dogs' style='height:25px;width: 300px;'>
+  </body>
+</html>
